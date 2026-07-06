@@ -1,5 +1,6 @@
-const pool = require('./database/db');
-const express = require('express');
+import pool from './database/db.js';
+import express from 'express';
+
 const app = express();
 const PORT = 5000;
 
