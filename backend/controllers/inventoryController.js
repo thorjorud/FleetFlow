@@ -1,9 +1,22 @@
-import pool from '../database/db.js';
+import Inventory from '../models/inventoryModel.js';
 
+export const getInventoryById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const item = await Inventory.getById(id);
+        if (!item) {
+            return res.status(404).json({ error: 'Inventory item not found' });
+        }
+        res.json(item);
+    } catch (err) {
+        console.error('Error executing query:', err.stack);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
 export const getInventory = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM inventory ORDER BY id ASC');
-        res.json(result.rows);    
+        const items = await Inventory.getAll();
+        res.json(items);
     } catch (err) {
         console.error('Error executing query:', err.stack);
         res.status(500).json({ error: 'Internal Server Error'});
@@ -13,9 +26,8 @@ export const getInventory = async (req, res) => {
 export const addInventoryItem = async (req, res) => {
     try {
         const {name, quantity, status} = req.body;
-        const result = await pool.query(
-            'INSERT INTO inventory (name, quantity, status) VALUES ($1, $2, $3) RETURNING *', [name, quantity, status]);
-            res.status(201).json(result.rows[0]);
+        const newItem = await Inventory.create(name, quantity, status);
+        res.status(201).json(newItem);
     } catch (err) {
         console.error('Error executing query:', err.stack);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -27,16 +39,13 @@ export const updateInventoryItem = async (req, res) => {
         const { id } = req.params;
         const { name, quantity, status } = req.body;
 
-        const result = await pool.query(
-            'UPDATE inventory SET name = $1, quantity = $2, status = $3 WHERE id = $4 RETURNING *',
-            [name, quantity, status, id]
-        );
+        const updatedItem = await Inventory.update(id, name, quantity, status);
 
-        if (result.rows.length === 0) {
+        if (!updatedItem) {
             return res.status(404).json({ error: 'Inventory item not found' });
         }
 
-        res.json(result.rows[0]);
+        res.json(updatedItem);
     } catch (err) {
         console.error('Error executing query:', err.stack);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -47,13 +56,13 @@ export const deleteInventoryItem = async (req, res) => {
     try {
         const { id } = req.params;
         
-        const result = await pool.query('DELETE FROM inventory WHERE id = $1 RETURNING *', [id]);
+        const deletedItem = await Inventory.delete(id);
 
-        if (result.rows.length === 0) {
+        if (!deletedItem) {
             return res.status(404).json({ error: 'Inventory item not found' });
         }
 
-        res.json({ message: 'Item deleted successfully', deletedItem: result.rows[0] });
+        res.json({ message: 'Item deleted successfully', deletedItem: deletedItem });
     } catch (err) {
         console.error('Error executing query:', err.stack);
         res.status(500).json({ error: 'Internal Server Error' });

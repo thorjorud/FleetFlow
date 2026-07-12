@@ -1,5 +1,5 @@
 import express from 'express';
-import { getInventory, addInventoryItem, updateInventoryItem, deleteInventoryItem } from '../controllers/inventoryController.js';
+import { getInventoryById, getInventory, addInventoryItem, updateInventoryItem, deleteInventoryItem } from '../controllers/inventoryController.js';
 
 const router = express.Router();
 
@@ -8,6 +8,7 @@ router.route('/')
     .post(addInventoryItem);
 
 router.route('/:id')
+    .get(getInventoryById)
     .put(updateInventoryItem)
     .delete(deleteInventoryItem);
 
