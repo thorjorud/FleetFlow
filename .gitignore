@@ -1,2 +1,19 @@
-backend/node_modules/
-backend/.env
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env
+.env.local
+*.env
+
+# Build Outputs & Logs
+dist/
+dist-ssr/
+build/
+*.log
+logs/
+
+# Editor & OS Files
+.DS_Store
+.vscode/
+.idea/
