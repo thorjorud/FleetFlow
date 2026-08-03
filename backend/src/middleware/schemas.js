@@ -1,9 +1,5 @@
 import { z } from 'zod';
 
-// ==========================================
-// 1. INVENTORY SCHEMAS (POST, PUT)
-// ==========================================
-
 export const inventoryCreateSchema = z.object({
   body: z.object({
     name: z.string().min(1, "Name is required").max(100),
@@ -20,10 +16,6 @@ export const inventoryUpdateSchema = z.object({
   })
 });
 
-// ==========================================
-// 2. ROUTES SCHEMAS (POST, PUT)
-// ==========================================
-
 export const routeCreateSchema = z.object({
   body: z.object({
     route_number: z.string().min(1, "Route number is required").max(50),
@@ -38,11 +30,6 @@ export const routeUpdateSchema = z.object({
   })
 });
 
-// ==========================================
-// 3. DELIVERIES SCHEMAS (POST, PUT, PATCH)
-// ==========================================
-
-// If you have a POST endpoint to add a delivery to a route
 export const deliveryCreateSchema = z.object({
   body: z.object({
     route_id: z.number().int().positive("Valid route ID is required"),
@@ -51,7 +38,6 @@ export const deliveryCreateSchema = z.object({
   })
 });
 
-// If you have a PUT endpoint to update the whole delivery record
 export const deliveryUpdateSchema = z.object({
   body: z.object({
     route_id: z.number().int().positive("Valid route ID is required"),
@@ -60,7 +46,6 @@ export const deliveryUpdateSchema = z.object({
   })
 });
 
-// For your PATCH endpoint targeting just the status update
 export const deliveryStatusSchema = z.object({
   body: z.object({
     status: z.enum(['Pending', 'Delivered', 'Failed'], {
