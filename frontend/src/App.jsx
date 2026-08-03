@@ -1,6 +1,6 @@
-// src/App.jsx
 import React from 'react';
 import './App.css';
+import InventoryTable from './components/InventoryTable';
 
 function App() {
   return (
@@ -11,6 +11,11 @@ function App() {
           <span className="status-dot"></span> System Live
         </div>
       </header>
+
+      <main className="dashboard-content">
+        <InventoryTable />
+      </main>
+
     </div>
   );
 }
