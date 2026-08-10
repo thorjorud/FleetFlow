@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import InventoryTable from './components/InventoryTable';
+import InventoryForm from './components/InventoryForm';
 
 function App() {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleItemAdded = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
@@ -13,9 +20,13 @@ function App() {
       </header>
 
       <main className="dashboard-content">
-        <InventoryTable />
+        <InventoryForm onItemAdded={handleItemAdded} />
+        <InventoryTable
+          key={refreshKey}
+          onDeleteSuccess={handleItemAdded}
+          onUpdateSuccess={handleItemAdded}
+        />
       </main>
-
     </div>
   );
 }
