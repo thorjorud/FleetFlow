@@ -26,7 +26,7 @@ export const getDeliveryById = async (req, res) => {
 
 export const updateDeliveryStatus = async (req, res) => {
     try {
-        const { id } = req.params;
+        const id = req.params.id;
         const { status } = req.body;
 
         const updatedDelivery = await Delivery.updateStatus(id, status);
