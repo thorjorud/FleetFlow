@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const DATABASE_URL = "postgresql://postgres.rhqkbbvhvxtfhhbipvlk:403Lawoffice!!@aws-0-us-west-2.pooler.supabase.com:5432/postgres";
 const { Pool } = pg;
 
 const pool = new Pool(
