@@ -38,7 +38,7 @@ export const addInventoryItem = async (itemData) => {
 
 export const updateInventoryItem = async (id, itemData) => {
   const response = await fetch(`${INVENTORY_URL}/${id}`, {
-    method: 'PUT', // or 'PATCH' depending on your backend route definition
+    method: 'PUT', 
     headers: {
       'Content-Type': 'application/json',
     },
