@@ -2,8 +2,6 @@
 
 A full-stack logistics and route management web application built to streamline inventory tracking, route planning, and delivery fulfillment status updates. Inspired by real-world route helper experience with Viking Coca-Cola, this project was developed as an independent summer engineering project using the PERN stack.
 
-  **Live Demo:** [View FleetFlow Live](https://fleet-flow-3cu6o1g97-fleet-flow2.vercel.app/)
-
 ---
 
 ## Tech Stack & Architecture
@@ -117,7 +115,7 @@ npm run dev
 
 ---
 
-## Frontend & Deployment
+## Frontend
 
 ### **Frontend Architecture**
 *   **Client Framework:** Built with React and bundled via Vite for high-performance hot-module replacement.
@@ -139,6 +137,3 @@ npm run dev
    ```
 
 ---
-
-### Production Deployment
-* Live Application: [View FleetFlow Live](https://fleet-flow-3cu6o1g97-fleet-flow2.vercel.app/) 
